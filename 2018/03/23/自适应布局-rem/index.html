@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="由于移动端特殊性，本文讲的是如何使用rem实现自适应，或叫rem响应式布局，通过使用一个脚本就可以rem自适应，不用再为各种设备宽度不同而烦恼如何实现自适应的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自适应布局-rem">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/自适应布局-rem/index.html">
+<meta property="og:site_name" content="小嘛小二郎">
+<meta property="og:description" content="由于移动端特殊性，本文讲的是如何使用rem实现自适应，或叫rem响应式布局，通过使用一个脚本就可以rem自适应，不用再为各种设备宽度不同而烦恼如何实现自适应的问题。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-23T08:27:50.536Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自适应布局-rem">
+<meta name="twitter:description" content="由于移动端特殊性，本文讲的是如何使用rem实现自适应，或叫rem响应式布局，通过使用一个脚本就可以rem自适应，不用再为各种设备宽度不同而烦恼如何实现自适应的问题。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/23/自适应布局-rem/"/>
+
+
+
+
+
+  <title>自适应布局-rem | 小嘛小二郎</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小嘛小二郎</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/自适应布局-rem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kevin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小嘛小二郎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">自适应布局-rem</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T15:09:05+08:00">
+                2018-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于移动端特殊性，本文讲的是如何使用rem实现自适应，或叫rem响应式布局，通过使用一个脚本就可以rem自适应，不用再为各种设备宽度不同而烦恼如何实现自适应的问题。<br><a id="more"></a></p>
+<h1 id="rem是相对于根元素html变化而变化的，我们只需要在根元素确定一个px字号，就可以算出元素的宽高。"><a href="#rem是相对于根元素html变化而变化的，我们只需要在根元素确定一个px字号，就可以算出元素的宽高。" class="headerlink" title="rem是相对于根元素html变化而变化的，我们只需要在根元素确定一个px字号，就可以算出元素的宽高。"></a><code>rem</code>是相对于根元素<code>html</code>变化而变化的，我们只需要在根元素确定一个px字号，就可以算出元素的宽高。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">(function(win) &#123;</span><br><span class="line">	var doc = win.document;</span><br><span class="line">	var docEl = doc.documentElement;</span><br><span class="line">	var metaEl = doc.querySelector(&apos;meta[name=&quot;viewport&quot;]&apos;);</span><br><span class="line">	var dpr = 0;</span><br><span class="line">	var scale = 0;</span><br><span class="line">	var tid;</span><br><span class="line">	if(!dpr &amp;&amp; !scale) &#123;</span><br><span class="line">		var isAndroid = win.navigator.appVersion.match(/android/gi);</span><br><span class="line">		var isIPhone = win.navigator.appVersion.match(/iphone/gi);</span><br><span class="line">		var isIpad = win.navigator.appVersion.match(/ipad/gi);</span><br><span class="line">		var devicePixelRatio = win.devicePixelRatio;</span><br><span class="line">		if(isIPhone) &#123;</span><br><span class="line">			// iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案</span><br><span class="line">			if(devicePixelRatio &gt;= 3 &amp;&amp; (!dpr || dpr &gt;= 3)) &#123;</span><br><span class="line">				dpr = 3;</span><br><span class="line">			&#125; else if(devicePixelRatio &gt;= 2 &amp;&amp; (!dpr || dpr &gt;= 2)) &#123;</span><br><span class="line">				dpr = 2;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				dpr = 1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; else if(isIpad || (document.documentElement.clientWidth &gt;= 980 &amp;&amp; isAndroid)) &#123;</span><br><span class="line">			dpr = 4;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			// 其他设备下，仍旧使用1倍的方案</span><br><span class="line">			dpr = 1;</span><br><span class="line">		&#125;</span><br><span class="line">		scale = 1 / dpr;</span><br><span class="line">	&#125;</span><br><span class="line">	docEl.setAttribute(&apos;data-dpr&apos;, dpr);</span><br><span class="line">	if(!metaEl) &#123;</span><br><span class="line">		metaEl = doc.createElement(&apos;meta&apos;);</span><br><span class="line">		metaEl.setAttribute(&apos;name&apos;, &apos;viewport&apos;);</span><br><span class="line">		metaEl.setAttribute(&apos;content&apos;, &apos;width=device-width,initial-scale=&apos; + scale + &apos;,maximum-scale=&apos; + 1 + &apos;, minimum-scale=&apos; + scale + &apos;, user-scalable=no&apos;);</span><br><span class="line">		if(docEl.firstElementChild) &#123;</span><br><span class="line">			docEl.firstElementChild.appendChild(metaEl);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			var wrap = doc.createElement(&apos;div&apos;);</span><br><span class="line">			wrap.appendChild(metaEl);</span><br><span class="line">			doc.write(wrap.innerHTML);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	function refreshRem() &#123;</span><br><span class="line">		var width = docEl.getBoundingClientRect().width;</span><br><span class="line">		if(width / dpr &gt; 540 &amp;&amp; width &lt; 1080) &#123;</span><br><span class="line">			width = 540 * dpr;</span><br><span class="line">		&#125;</span><br><span class="line">		var rem = width / 10;</span><br><span class="line">		docEl.style.fontSize = rem + &apos;px&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">	if(doc.readyState === &apos;complete&apos;) &#123;</span><br><span class="line">		doc.body.style.fontSize = 12 * dpr + &apos;px&apos;;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		doc.addEventListener(&apos;DOMContentLoaded&apos;, function(e) &#123;</span><br><span class="line">			doc.body.style.fontSize = 12 * dpr + &apos;px&apos;;</span><br><span class="line">		&#125;, false);</span><br><span class="line">	&#125;</span><br><span class="line">	refreshRem();</span><br><span class="line">&#125;)(window);</span><br></pre></td></tr></table></figure>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="1-判断设备，对根元素html进行font-size的设置"><a href="#1-判断设备，对根元素html进行font-size的设置" class="headerlink" title="1.判断设备，对根元素html进行font-size的设置;"></a>1.判断设备，对根元素<code>html</code>进行font-size的设置;</h2><h2 id="2-同时动态生成viewport，并设置initial-scale-缩放-的值。"><a href="#2-同时动态生成viewport，并设置initial-scale-缩放-的值。" class="headerlink" title="2.同时动态生成viewport，并设置initial-scale(缩放)的值。"></a>2.同时动态生成viewport，并设置<code>initial-scale</code>(缩放)的值。</h2><h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="1-在页面引入这段js代码，同时页面不需要设置默认的viewport值"><a href="#1-在页面引入这段js代码，同时页面不需要设置默认的viewport值" class="headerlink" title="1.在页面引入这段js代码，同时页面不需要设置默认的viewport值;"></a>1.在页面引入这段js代码，同时页面不需要设置默认的viewport值;</h2><h2 id="2-根据设计稿上元素尺寸字号去写样式-例如某张图片的宽为200px，高为200px，那设置的宽应为-200-设计稿宽度-10-rem-高为-200-设计稿宽度-10-rem。"><a href="#2-根据设计稿上元素尺寸字号去写样式-例如某张图片的宽为200px，高为200px，那设置的宽应为-200-设计稿宽度-10-rem-高为-200-设计稿宽度-10-rem。" class="headerlink" title="2.根据设计稿上元素尺寸字号去写样式,例如某张图片的宽为200px，高为200px，那设置的宽应为(200/(设计稿宽度/10))rem,高为(200/(设计稿宽度/10))rem。"></a>2.根据设计稿上元素尺寸字号去写样式,例如某张图片的宽为200px，高为200px，那设置的宽应为(200/(设计稿宽度/10))rem,高为(200/(设计稿宽度/10))rem。</h2><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><h3 id="字体建议还是用px，使用rem容易出现带小数点的字体或者奇数字体的情况"><a href="#字体建议还是用px，使用rem容易出现带小数点的字体或者奇数字体的情况" class="headerlink" title="字体建议还是用px，使用rem容易出现带小数点的字体或者奇数字体的情况;"></a>字体建议还是用px，使用rem容易出现带小数点的字体或者奇数字体的情况;</h3><h3 id="有些情况会出现设置字体大小无效，解决方法是设置display-inline-block。"><a href="#有些情况会出现设置字体大小无效，解决方法是设置display-inline-block。" class="headerlink" title="有些情况会出现设置字体大小无效，解决方法是设置display:inline-block。"></a>有些情况会出现设置字体大小无效，解决方法是设置<code>display:inline-block</code>。</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/23/AMP和MIP简介/" rel="next" title="AMP和MIP简介">
+                <i class="fa fa-chevron-left"></i> AMP和MIP简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Kevin</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rem是相对于根元素html变化而变化的，我们只需要在根元素确定一个px字号，就可以算出元素的宽高。"><span class="nav-number">1.</span> <span class="nav-text">rem是相对于根元素html变化而变化的，我们只需要在根元素确定一个px字号，就可以算出元素的宽高。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-判断设备，对根元素html进行font-size的设置"><span class="nav-number">2.1.</span> <span class="nav-text">1.判断设备，对根元素html进行font-size的设置;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-同时动态生成viewport，并设置initial-scale-缩放-的值。"><span class="nav-number">2.2.</span> <span class="nav-text">2.同时动态生成viewport，并设置initial-scale(缩放)的值。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-在页面引入这段js代码，同时页面不需要设置默认的viewport值"><span class="nav-number">3.1.</span> <span class="nav-text">1.在页面引入这段js代码，同时页面不需要设置默认的viewport值;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-根据设计稿上元素尺寸字号去写样式-例如某张图片的宽为200px，高为200px，那设置的宽应为-200-设计稿宽度-10-rem-高为-200-设计稿宽度-10-rem。"><span class="nav-number">3.2.</span> <span class="nav-text">2.根据设计稿上元素尺寸字号去写样式,例如某张图片的宽为200px，高为200px，那设置的宽应为(200/(设计稿宽度/10))rem,高为(200/(设计稿宽度/10))rem。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意点"><span class="nav-number">4.</span> <span class="nav-text">注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字体建议还是用px，使用rem容易出现带小数点的字体或者奇数字体的情况"><span class="nav-number">4.0.1.</span> <span class="nav-text">字体建议还是用px，使用rem容易出现带小数点的字体或者奇数字体的情况;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有些情况会出现设置字体大小无效，解决方法是设置display-inline-block。"><span class="nav-number">4.0.2.</span> <span class="nav-text">有些情况会出现设置字体大小无效，解决方法是设置display:inline-block。</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kevin</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
